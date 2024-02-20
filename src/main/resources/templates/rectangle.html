@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Students' GPAs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --background-color: #f7faff;
+            --bar-fill-color-start: #4e8df5;
+            --bar-fill-color-end: #4ed5f5;
+            --text-color: #ffffff;
+            --bar-background-color: #e2e8f0;
+            --bar-height: 35px;
+            --bar-radius: 18px;
+            --transition-duration: 0.75s;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            padding: 40px;
+            background-color: var(--background-color);
+            color: #333;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            transition: background-color var(--transition-duration);
+        }
+
+        body:hover {
+            background-color: #e7effe;
+        }
+
+        .gpa-container {
+            width: 100%;
+            max-width: 700px;
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 22px;
+            box-shadow: 0 10px 30px var(--shadow-color);
+            transition: transform var(--transition-duration);
+        }
+
+        .gpa-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px var(--shadow-color);
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 35px;
+            font-weight: 600;
+        }
+
+        .bar-container {
+            background-color: var(--bar-background-color);
+            border-radius: var(--bar-radius);
+            overflow: hidden;
+            margin-bottom: 15px;
+            transition: background-color var(--transition-duration);
+        }
+
+        .bar-container:hover {
+            background-color: #dae1e7;
+        }
+
+        .bar {
+            height: var(--bar-height);
+            background-image: linear-gradient(45deg, var(--bar-fill-color-start), var(--bar-fill-color-end));
+            color: var(--text-color);
+            line-height: var(--bar-height);
+            width: 0;
+            /* Initial state */
+            display: flex;
+            align-items: center;
+            padding-left: 15px;
+            border-radius: var(--bar-radius);
+            transition: width var(--transition-duration) ease, filter 0.3s;
+            box-shadow: inset 0 -2px 2px rgba(255, 255, 255, 0.1);
+        }
+
+        .bar:hover {
+            filter: brightness(115%);
+        }
+
+        .bar::after {
+            content: attr(data-gpa);
+            margin-left: auto;
+            padding-right: 20px;
+            font-weight: 500;
+        }
+
+        .bar-loaded {
+            width: var(--calculated-width);
+            transition: width 2s ease;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="gpa-container">
+        <h3>Students' GPAs</h3>
+        <div th:each="student : ${students}" class="bar-container">
+            <div class="bar" th:style="'width:' + (${student.gpa} / 5 * 100) + '%;'"
+                th:text="${student.name} + ' - ' + ${student.gpa}">
+                [Name] - [GPA]
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const bars = document.querySelectorAll('.bar');
+
+            let delay = 250;
+            bars.forEach(bar => {
+                setTimeout(() => {
+                    const studentGpa = bar.getAttribute('data-gpa');
+                    const maxGpa = 5.0;
+                    const width = (parseFloat(studentGpa) / maxGpa) * 100;
+                    bar.style.width = width + '%';
+                }, delay);
+                delay += 250;
+            });
+        });
+    </script>
+</body>
+</html>

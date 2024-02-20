@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>View Students</title>
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+
+    <div class="container mt-5">
+        <h2>Students List</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Weight</th>
+                    <th>Height</th>
+                    <th>Hair Color</th>
+                    <th>GPA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user : ${students}">
+                    <td th:text="${user.name}">Name</td>
+                    <td th:text="${user.weight}">Weight</td>
+                    <td th:text="${user.height}">Height</td>
+                    <td th:text="${user.hairColor}">Hair Color</td>
+                    <td th:text="${user.gpa}">GPA</td>
+                </tr>
+            </tbody>
+        </table>
+        <div>
+            <p>Do you like to observe the rectangular view?</p>
+            <form action="/submit" method="get">
+                <button type="submit" class="btn btn-custom">YES</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Student</title>
+    <link rel="stylesheet" href="//stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+
+<body>
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="form-container">
+            <h2 class="form-title"> Update Student Form By Name, please enter info for student you want to update.</h2>
+            <form action="/users/update" method="post">
+                <input type="text" class="form-control" id="name" name="name" placeholder="name"><br>
+                <input type="text" class="form-control" id="weight" name="weight" placeholder="weight"><br>
+                <input type="text" class="form-control" id="height" name="height" placeholder="height"><br>
+                <select class="form-select" id="hairColor" name="hairColor"><br>
+                    <option value="black">Black</option>
+                    <option value="brown">Brown</option>
+                    <option value="blonde">Blonde</option>
+                    <option value="blue">Blue</option>
+                    <option value="white">White</option>
+                    <option value="orange">Orange</option>
+                    <option value="grey">Grey</option>
+                    <option value="red">Red</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="green">Green</option>
+                    <option value="other">Other</option>
+                </select><br>
+                <br>
+                <input type="text" class="form-control" id="gpa" name="gpa" placeholder="GPA"><br>
+                <button type="submit" class="btn btn-custom">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
